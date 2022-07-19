@@ -4,18 +4,37 @@ namespace Lyhty\Ownership;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Validation\Rule;
+use RuntimeException;
 
 class OwnershipRule extends Rule
 {
     protected Model $model;
-    protected ?string $foreignKey;
-    protected $ownerId;
+    protected $owner;
+    protected string $foreignKey;
 
-    public function __construct($model, string $foreignKey = null, $ownerId = null)
+    /**
+     * The rule constructor.
+     *
+     * @param \Illuminate\Database\Eloquent\Model $model
+     * @param \Illuminate\Database\Eloquent\Model|string|int $owner
+     * @param string|null $foreignKey 
+     * Required if owner argument is not a Model instance.
+     */
+    public function __construct($model, $owner, string $foreignKey = null)
     {
         $this->model = $model instanceof Model ? $model : new $model;
         $this->foreignKey = $foreignKey;
-        $this->ownerId = $ownerId;
+
+        if ($owner instanceof Model) {
+            $this->owner = $owner->getKey();
+            $this->foreignKey ??= $owner->getForeignKey();
+        } else {
+            $this->owner = $owner;
+        }
+
+        if (is_null($this->foreignKey)) {
+            throw new RuntimeException("Foreign key could not be resolved.");
+        }
     }
 
     /**
@@ -27,12 +46,12 @@ class OwnershipRule extends Rule
      */
     public function passes($attribute, $value)
     {
-        $foreignKey = $this->foreignKey ??= $this->getForeignKey();
-        $ownerId = $this->ownerId ??= auth()->id();
+        $foreignKey = $this->foreignKey;
+        $owner = $this->owner ??= auth()->id();
 
-        return $ownerId && $this->model->query()
+        return $owner && $this->model->query()
             ->whereKey($value)
-            ->where($foreignKey, $ownerId)
+            ->where($foreignKey, $owner)
             ->exists();
     }
 
