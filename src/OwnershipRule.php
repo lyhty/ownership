@@ -10,7 +10,7 @@ class OwnershipRule extends Rule
 {
     protected Model $model;
     protected $owner;
-    protected string $foreignKey;
+    protected ?string $foreignKey;
 
     /**
      * The rule constructor.
