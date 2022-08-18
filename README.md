@@ -6,6 +6,8 @@
 [![License](https://img.shields.io/packagist/l/lyhty/ownership.svg?style=flat-square)](https://packagist.org/packages/lyhty/ownership)
 [![Total Downloads](https://img.shields.io/packagist/dt/lyhty/ownership.svg?style=flat-square)](https://packagist.org/packages/lyhty/ownership)
 
+<!-- CUTOFF -->
+
 This package provides a lightweight trait and a validation rule for who owns what in your Laravel project.
 
 ## Installation
