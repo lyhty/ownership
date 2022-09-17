@@ -3,6 +3,7 @@
 </p>
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/lyhty/ownership.svg?style=flat-square)](https://packagist.org/packages/lyhty/ownership)
+[![PHP](https://img.shields.io/packagist/php-v/lyhty/ownership?style=flat-square)](https://packagist.org/packages/lyhty/ownership)
 [![License](https://img.shields.io/packagist/l/lyhty/ownership.svg?style=flat-square)](https://packagist.org/packages/lyhty/ownership)
 [![Total Downloads](https://img.shields.io/packagist/dt/lyhty/ownership.svg?style=flat-square)](https://packagist.org/packages/lyhty/ownership)
 
