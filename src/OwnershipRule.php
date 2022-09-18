@@ -9,16 +9,17 @@ use RuntimeException;
 class OwnershipRule extends Rule
 {
     protected Model $model;
+
     protected $owner;
+
     protected ?string $foreignKey;
 
     /**
      * The rule constructor.
      *
-     * @param \Illuminate\Database\Eloquent\Model $model
-     * @param \Illuminate\Database\Eloquent\Model|string|int $owner
-     * @param string|null $foreignKey 
-     * Required if owner argument is not a Model instance.
+     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  \Illuminate\Database\Eloquent\Model|string|int  $owner
+     * @param  string|null  $foreignKey  Required if owner argument is not a Model instance.
      */
     public function __construct($model, $owner, string $foreignKey = null)
     {
@@ -33,7 +34,7 @@ class OwnershipRule extends Rule
         }
 
         if (is_null($this->foreignKey)) {
-            throw new RuntimeException("Foreign key could not be resolved.");
+            throw new RuntimeException('Foreign key could not be resolved.');
         }
     }
 
@@ -62,6 +63,6 @@ class OwnershipRule extends Rule
      */
     public function message()
     {
-        return "The :attribute is not owned by the specified owner.";
+        return 'The :attribute is not owned by the specified owner.';
     }
 }
