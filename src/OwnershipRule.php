@@ -6,7 +6,7 @@ use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
 use RuntimeException;
 
-class OwnershipRule extends Rule
+class OwnershipRule implements Rule
 {
     protected Model $model;
 
