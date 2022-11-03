@@ -3,7 +3,7 @@
 namespace Lyhty\Ownership;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Validation\Rule;
+use Illuminate\Contracts\Validation\Rule;
 use RuntimeException;
 
 class OwnershipRule extends Rule
