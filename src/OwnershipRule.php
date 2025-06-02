@@ -21,7 +21,7 @@ class OwnershipRule implements Rule
      * @param  \Illuminate\Database\Eloquent\Model|string|int  $owner
      * @param  string|null  $foreignKey  Required if owner argument is not a Model instance.
      */
-    public function __construct($model, $owner, string $foreignKey = null)
+    public function __construct($model, $owner, ?string $foreignKey = null)
     {
         $this->model = $model instanceof Model ? $model : new $model;
         $this->foreignKey = $foreignKey;

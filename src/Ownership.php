@@ -13,7 +13,7 @@ trait Ownership
      * @param  string|null  $key
      * @return bool
      */
-    public function owns(Model $model, string $key = null): bool
+    public function owns(Model $model, ?string $key = null): bool
     {
         $key ??= $this->getForeignKey();
 
@@ -27,7 +27,7 @@ trait Ownership
      * @param  string|null  $key
      * @return bool
      */
-    public function doesntOwn(Model $model, string $key = null): bool
+    public function doesntOwn(Model $model, ?string $key = null): bool
     {
         return ! $this->owns($model, $key);
     }
