@@ -4,25 +4,29 @@ namespace Lyhty\Ownership;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use RuntimeException;
 
 class OwnershipRule implements Rule
 {
     protected Model $model;
 
-    protected $owner;
+    protected string|int $owner;
 
     protected ?string $foreignKey;
 
     /**
      * The rule constructor.
      *
-     * @param  \Illuminate\Database\Eloquent\Model  $model
+     * @param  \Illuminate\Database\Eloquent\Model|string  $model
      * @param  \Illuminate\Database\Eloquent\Model|string|int  $owner
      * @param  string|null  $foreignKey  Required if owner argument is not a Model instance.
      */
-    public function __construct($model, $owner, ?string $foreignKey = null)
-    {
+    public function __construct(
+        Model|string $model, 
+        Model|string|int $owner, 
+        ?string $foreignKey = null
+    ) {
         $this->model = $model instanceof Model ? $model : new $model;
         $this->foreignKey = $foreignKey;
 
@@ -48,7 +52,7 @@ class OwnershipRule implements Rule
     public function passes($attribute, $value)
     {
         $foreignKey = $this->foreignKey;
-        $owner = $this->owner ??= auth()->id();
+        $owner = $this->owner ??= Auth::id();
 
         return $owner && $this->model->query()
             ->whereKey($value)
